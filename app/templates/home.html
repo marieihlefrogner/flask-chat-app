@@ -2,13 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/mainstyle.css">
+    <link rel="stylesheet" href="../static/css/mobile-style.css">
     <script src="../static/js/socket.io.min.js"></script>
     <script src="../static/js/jquery-3.4.1.slim.min.js"></script>
     <script src="../static/js/popper.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/clipboard.min.js"></script>
     <script src="../static/js/webchat.js"></script>
+    <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
 </head>
 
 <body style="background-color:#{{ color }};">
@@ -21,7 +26,6 @@
     {% else %}
         <img class="rounded img-fluid mx-auto d-block mb-3" alt="Image" src="{{ image_file }}">
     {% endif %}
-    <p class="text-center mt-3">This page has been viewed <span id="pageViews"></span> times!</p>
 </div>
 
 {% if chat_enabled == True %}
@@ -31,13 +35,11 @@
                 <input type="text" class="form-control" id="myName" placeholder="Your name">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="myMessage" placeholder="Your message">
+                <textarea autofocus rows="10" class="form-control" id="myMessage" placeholder="Your message"></textarea>
             </div>
             <button id="sendButton" class="btn btn-primary">Send</button>
         </fieldset>
     </div>
-
-
     <div class="container mt-5" id="messagesContainer">
         {% for message in messages %}
             <div class="card mb-2">
@@ -48,8 +50,9 @@
                         <h5 class="card-title">{{ message.name }}</h5>
                     {% endif %}
                     <h6 class="card-subtitle mb-2 text-muted">{{ message.date_posted }}</h6>
+                    <a class="copy-text mb-2 text-muted" data-clipboard-target="#content_{{ message.id }}">Copy</a>
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="content_{{ message.id }}">
                     {% if message.content == '' %}
                         I forgot to add a message.
                     {% else %}

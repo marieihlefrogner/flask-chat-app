@@ -19,7 +19,7 @@ def home_page():
                            messages=messages, color=instance.homepage_hex_color,
                            is_default=instance.media_file_is_default)
 
-@main.route('/super-secret-admin-page', methods=['GET', 'POST'])
+@main.route('/admin-page', methods=['GET', 'POST'])
 def admin_page():
     instance = Instance.query.first()
 

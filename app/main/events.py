@@ -16,8 +16,8 @@ def handle_message(msg):
     name = msg['name']
     content = msg['message']
 
-    name_cleaned = profanity.censor(name)
-    content_cleaned = profanity.censor(content)
+    name_cleaned = name #profanity.censor(name)
+    content_cleaned = content #profanity.censor(content)
 
     now = datetime.now().strftime('%A %I:%M:%S %p').lstrip("0").replace(" 0", " ")
 
@@ -28,7 +28,8 @@ def handle_message(msg):
     json_data = {
         'name' : name_cleaned,
         'content' : content_cleaned,
-        'date' : now
+        'date' : now,
+        'id' : message_object.id,
     }
 
     send({'json_data' : json_data}, broadcast=True)
