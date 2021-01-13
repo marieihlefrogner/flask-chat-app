@@ -10,3 +10,7 @@ Demonstration of a Flask application with live chat functionality.  Comments are
 
 # How to use
 Included is `requirements.txt` to quickly install all dependencies using the command `pip install -r requirements.txt`. Using the Flask development server, simply run `run.py`.  You're set!
+
+# Original repository
+
+https://github.com/MarkMichon1/Flask-Chat-App/
