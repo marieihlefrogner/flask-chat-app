@@ -13,7 +13,12 @@ def home_page():
     instance = Instance.query.first()
     image_file = url_for('static', filename=f'media/{instance.media_file}')
     messages = Message.query.order_by(Message.id.desc()).all()
+    
+    for message in messages:
+        message.content = message.content.replace('\n', '<br>')
+
     room_name = 'home'
+
     return render_template('home.html', title=instance.homepage_title, image_file=image_file, views=instance.page_views,
                            is_video = instance.media_is_video, chat_enabled = instance.chat_enabled, room=room_name,
                            messages=messages, color=instance.homepage_hex_color,

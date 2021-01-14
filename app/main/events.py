@@ -17,7 +17,7 @@ def handle_message(msg):
     content = msg['message']
 
     name_cleaned = name #profanity.censor(name)
-    content_cleaned = content #profanity.censor(content)
+    content_cleaned = content.replace('\n', '<br>') #profanity.censor(content)
 
     now = datetime.now().strftime('%A %I:%M:%S %p').lstrip("0").replace(" 0", " ")
 
